@@ -4,6 +4,11 @@
 	<meta charset="UTF-8">
 	<title>Dialog Example</title>
 	<style type="text/css">
+
+	body{
+		height: 3000px;
+	}
+
 	.didi-dialog-wall{ position:absolute; left:0px; top:0px; display:none; z-index: 9998; }
 	.didi-dialog-wrap{ box-sizing: border-box; text-align:center; position:absolute; border-radius: 5px; -webkit-border-radius: 8px; background:#e8e7e6; display: none; z-index: 9999; }
 	.didi-dialog-bar{ -webkit-border-top-left-radius: 8px; -webkit-border-top-right-radius: 8px; border-top-left-radius: 8px; border-top-right-radius: 8px; margin: 0px; height: 8px; background-color: #ff8a01; box-sizing: content-box; }
@@ -17,9 +22,13 @@
 	</style>
 </head>
 <body>
+	<section>
+		
+	
 	<input type="button" id="btn-dialog-loading" value="LOADING" />
 	<input type="button" id="btn-dialog-alert" value="ALERT" />
 	<input type="button" id="btn-dialog-confirm" value="CONFIRM" />
+	</section>
 	<script type="text/javascript" src="didi.dialog.js"></script>
 	<script type="text/javascript">
 	window.addEventListener("DOMContentLoaded",function(ev){

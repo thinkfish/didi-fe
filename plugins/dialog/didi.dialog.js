@@ -1,5 +1,4 @@
 (function(window, undefined) {
-	//todo:防止命名空间didi冲突
 	var didi = window.didi || {};
 
 	if (didi.dialog) {
@@ -11,21 +10,22 @@
 	var document = window.document,
 		docElem = document.documentElement,
 		body = document.body,
-		first_script_in_body = body.getElementsByTagName("script")[0];
-
-	var s_heigth = body.scrollHeight,
-		s_width = body.scrollWidth;
-
-	var s_top = docElem.scrollTop,
-		s_left = docElem.scrollLeft;
-
-	var c_height = docElem.clientHeight,
+		s_heigth = body.scrollHeight,
+		s_width = body.scrollWidth,
+		s_top = docElem.scrollTop,
+		s_left = docElem.scrollLeft,
+		c_height = docElem.clientHeight,
 		c_width = docElem.clientWidth;
 
 	var d_wall = null,
 		d_wrap = null,
 		_dialog = null;
 
+	/**
+	 * dialog构造函数
+	 * @param  {[type]} opts [description]
+	 * @return {[type]}      [description]
+	 */
 	var dialog = function(opts) {
 		//这个dialog对象应该使用强制使用new模式
 		if (!(this instanceof dialog)) {
@@ -42,13 +42,7 @@
 	 * @return {Boolean}     [description]
 	 */
 	var is_array = function(obj) {
-		var res = false;
-		if (typeof Array.isArray) {
-			res = Array.isArray(obj);
-		} else {
-			res = (Object.prototype.toString.call(obj) === '[object Array]');
-		}
-		return res;
+		return typeof Array.isArray === "function" ? Array.isArray(obj) : Object.prototype.toString.call(obj) === '[object Array]';
 	};
 
 	/**
@@ -57,14 +51,19 @@
 	 * @return {[type]}         [description]
 	 */
 	var insertDom = function(newNode) {
-		if (first_script_in_body) {
-			body.insertBefore(newNode, first_script_in_body);
+		var sc = body.getElementsByTagName("script")[0];
+		if (sc) {
+			body.insertBefore(newNode, sc);
 		} else {
 			body.appendChild(newNode);
 		}
 	};
 
 
+	/**
+	 * 对象
+	 * @type {Function}
+	 */
 	dialog.fn = dialog.prototype = {
 		constructor: dialog,
 		init: function(opts) {
@@ -169,7 +168,7 @@
 			}
 			html += "</div>";
 
-			div_wrap.innerHTML = html;
+			div_wrap.innerHTML = html; //插入增加的
 
 			tmp_d_wall = document.getElementById('d_wall');
 			tmp_d_wrap = document.getElementById('d_wrap');
@@ -208,34 +207,23 @@
 
 		},
 		_dialogPoint: function() {
-			// var s_top = docElem.scrollTop,
-			// s_left = docElem.scrollLeft;
-			// alert(s_top + " " + s_left); //0,0
-			var c_height = docElem.clientHeight,
-				c_width = docElem.clientWidth;
-			// alert(c_height + " " + c_width);
-			var _height = d_wrap.style.height.replace("px", ""),
+			var s_top = body.scrollTop,
+				s_left = body.scrollLeft,
+				_height = d_wrap.style.height.replace("px", ""),
 				_width = d_wrap.style.width.replace("px", "");
 
-			// alert(_height + " " + _width);
-			var top = (c_height - _height - 20) / 2,
-				left = (c_width - _width) / 2;
-			// alert(top + " " + left);
-			return {
-				top: top,
-				left: left
+			var res = {
+				top: s_top + (c_height - _height - 100) / 2, //100近似浏览器上面的部分
+				left: s_left + (c_width - _width) / 2
 			};
+			return res;
 		}
 	};
 
 	dialog.fn.show = function() {
 		var that = this;
 		if (d_wall && d_wrap) {
-			var c_height = docElem.clientHeight, //浏览器可见视口的高度和
-				c_width = docElem.clientWidth;
 
-
-			// alert(c_height + " " + c_width);
 			d_wall.style.width = c_width + "px";
 			d_wall.style.height = c_height + "px";
 			d_wall.style.display = "block";
@@ -246,11 +234,11 @@
 			d_wrap.style.display = "inline-block";
 
 			window.addEventListener("resize", function() {
-				// that.reset.call(that);
+				that.reset.call(that);
 			}, false);
 
 			window.addEventListener("scroll", function() {
-				// that.reset.call(that);
+				that.reset.call(that);
 			}, false);
 		}
 	};
@@ -262,17 +250,15 @@
 			d_wall.style.display = "none";
 			d_wrap.style.display = "none";
 		}
-
 	};
 
 	dialog.fn.reset = function() {
-		var display = d_wall.style.display;
-		if (display === "block" && d_wall && d_wrap) {
-			var c_height = document.documentElement.clientHeight,
-				c_width = document.documentElement.clientWidth;
+		if (d_wall && d_wrap && d_wall.style.display === "block") {
+			var s_height = docElem.scrollHeight,
+				s_width = docElem.scrollWidth;
 
-			d_wall.style.width = c_width + "px";
-			d_wall.style.height = c_height + "px";
+			d_wall.style.width = s_width + "px";
+			d_wall.style.height = s_height + "px";
 
 			var p = this._dialogPoint();
 			d_wrap.style.top = p.top + "px";
@@ -309,6 +295,7 @@
 		};
 		_dialog = new dialog(config);
 		_dialog.show();
+		// return _dialog;
 	};
 
 	didi.confirm = function(text, confirmCallback, cancelCallback, stop) {

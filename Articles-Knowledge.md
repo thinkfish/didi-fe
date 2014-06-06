@@ -20,3 +20,4 @@
 11. [viewport详解](http://www.w3cfuns.com/thread-5596726-1-1.html)
 12. [html5的meta详解](http://www.w3cfuns.com/thread-5595925-1-1.html)
 13. [浏览器渲染优化](https://github.com/puterjam/speed_render)
+14. [H5 Webworker](http://www.cnblogs.com/wishyouhappy/p/3766225.html)
