@@ -7,7 +7,12 @@
 		window.didi = didi; // 注册didi对象到window下
 	}
 
+	/**
+	 * variables
+	 * @type {[type]}
+	 */
 	var document = window.document,
+		getEleById = document.getElementById,
 		docElem = document.documentElement,
 		body = document.body,
 		s_heigth = body.scrollHeight,
@@ -15,9 +20,8 @@
 		s_top = docElem.scrollTop,
 		s_left = docElem.scrollLeft,
 		c_height = docElem.clientHeight,
-		c_width = docElem.clientWidth;
-
-	var d_wall = null,
+		c_width = docElem.clientWidth,
+		d_wall = null,
 		d_wrap = null,
 		_dialog = null;
 
@@ -27,7 +31,7 @@
 	 * @return {[type]}      [description]
 	 */
 	var dialog = function(opts) {
-		//这个dialog对象应该使用强制使用new模式
+		//强制使用new模式
 		if (!(this instanceof dialog)) {
 			_dialog = new dialog(opts);
 			return _dialog; //注意体会这个return，当不使用new的时候，会走到前一句，然后再走到dialog.fn.init,然后再执行return
@@ -42,7 +46,7 @@
 	 * @return {Boolean}     [description]
 	 */
 	var is_array = function(obj) {
-		return typeof Array.isArray === "function" ? Array.isArray(obj) : Object.prototype.toString.call(obj) === '[object Array]';
+		return Object.prototype.toString.call(obj) === '[object Array]';
 	};
 
 	/**
@@ -73,8 +77,8 @@
 
 			var div_wall = document.createElement('div');
 			div_wall.id = "d_wall";
-			div_wall.style.backgroundColor = opts.bgcolor || "black";
-			div_wall.style.opacity = opts.opacity || "0.2";
+			var cssText = "";
+			cssText = 'backgroundColor:' + (opts.bgcolor || "black") + ';opacity=' + (opts.opacity || "0.2") + '';
 			div_wall.style.filter = opts.opacity ? "alpha(opacity=" + (opts.opacity * 100) + ")" : "alpha(opacity=20)";
 			div_wall.className = "didi-dialog-wall";
 
@@ -82,7 +86,6 @@
 			div_wrap.id = "d_wrap";
 			div_wrap.style.width = opts.width || "260px";
 			div_wrap.style.height = opts.height || "210px";
-			// div_wrap.style.borderTop = (opts.bar === false) ? "none" : "8px solid #ff8a01";
 			div_wrap.style.backgroundColor = opts.d_bgcolor || "#e8e7e6";
 			div_wrap.style.opacity = opts.d_opacity ? opts.d_opacity : "";
 			div_wrap.style.filter = opts.d_opacity ? "alpha(opacity=" + (opts.d_opacity * 100) + ")" : "alpha(opacity=20)";
@@ -102,9 +105,8 @@
 				html += opts.dom.outerHTML;
 			} else if (opts.html && typeof opts.html === 'string') { //表示是html
 				html += opts.html;
-
 			} else if (opts.domId && opts.domId.length) {
-				var dom = document.getElementById(opts.domId);
+				var dom = getEleById(opts.domId);
 				if (dom) {
 					html += dom.outerHTML;
 				}
@@ -170,8 +172,8 @@
 
 			div_wrap.innerHTML = html; //插入增加的
 
-			tmp_d_wall = document.getElementById('d_wall');
-			tmp_d_wrap = document.getElementById('d_wrap');
+			tmp_d_wall = getEleById('d_wall');
+			tmp_d_wrap = getEleById('d_wrap');
 
 			if (!tmp_d_wall) {
 				insertDom(div_wall);
@@ -186,8 +188,8 @@
 				insertDom(div_wrap);
 			}
 
-			d_wall = document.getElementById('d_wall');
-			d_wrap = document.getElementById('d_wrap');
+			d_wall = getEleById('d_wall');
+			d_wrap = getEleById('d_wrap');
 
 			if (opts.btns && opts.btns.length && is_array(opts.btns)) {
 				for (var k = 0, ll = opts.btns.length; k < ll; k++) {
@@ -196,7 +198,7 @@
 						var btn_id = _btn.id,
 							event_type = _btn.eventType || "click",
 							callback = _btn.callback,
-							ele = document.getElementById(btn_id);
+							ele = getEleById(btn_id);
 
 						if (ele && !ele['on' + event_type]) {
 							ele.addEventListener(event_type, callback, false);
@@ -206,7 +208,7 @@
 			}
 
 		},
-		_dialogPoint: function() {
+		_dialogPosi: function() {
 			var s_top = body.scrollTop,
 				s_left = body.scrollLeft,
 				_height = d_wrap.style.height.replace("px", ""),
@@ -217,9 +219,13 @@
 				left: s_left + (c_width - _width) / 2
 			};
 			return res;
-		}
+		} // 获得dialog的相对位置
 	};
 
+	/**
+	 * show dialog
+	 * @return {[type]} [description]
+	 */
 	dialog.fn.show = function() {
 		var that = this;
 		if (d_wall && d_wrap) {
@@ -228,7 +234,7 @@
 			d_wall.style.height = c_height + "px";
 			d_wall.style.display = "block";
 
-			var p = this._dialogPoint();
+			var p = this._dialogPosi();
 			d_wrap.style.top = p.top + "px";
 			d_wrap.style.left = p.left + "px";
 			d_wrap.style.display = "inline-block";
@@ -244,7 +250,10 @@
 	};
 
 
-
+	/**
+	 * hide dialog
+	 * @return {[type]} [description]
+	 */
 	dialog.fn.hide = function() {
 		if (d_wall && d_wrap) {
 			d_wall.style.display = "none";
@@ -252,6 +261,10 @@
 		}
 	};
 
+	/**
+	 * reset dialog size
+	 * @return {[type]} [description]
+	 */
 	dialog.fn.reset = function() {
 		if (d_wall && d_wrap && d_wall.style.display === "block") {
 			var s_height = docElem.scrollHeight,
@@ -260,13 +273,18 @@
 			d_wall.style.width = s_width + "px";
 			d_wall.style.height = s_height + "px";
 
-			var p = this._dialogPoint();
+			var p = this._dialogPosi();
 			d_wrap.style.top = p.top + "px";
 			d_wrap.style.left = p.left + "px";
 		}
 	};
 
-
+	/**
+	 * alert dialog
+	 * @param  {[type]}   text     [description]
+	 * @param  {Function} callback [description]
+	 * @return {[type]}            [description]
+	 */
 	didi.alert = function(text, callback) {
 		var config = {
 			type: "alert",
@@ -298,6 +316,14 @@
 		// return _dialog;
 	};
 
+	/**
+	 * confirm dialog
+	 * @param  {[type]} text            [description]
+	 * @param  {[type]} confirmCallback [description]
+	 * @param  {[type]} cancelCallback  [description]
+	 * @param  {[type]} stop            [description]
+	 * @return {[type]}                 [description]
+	 */
 	didi.confirm = function(text, confirmCallback, cancelCallback, stop) {
 		_dialog = new dialog({
 			type: "confirm",
@@ -339,9 +365,16 @@
 		if (stop === true) {
 			return false;
 		}
-
 	};
 
+	/**
+	 * loading dialog
+	 * @param  {[type]} text   [description]
+	 * @param  {[type]} time   [description]
+	 * @param  {[type]} hideCB [description]
+	 * @param  {[type]} showCB [description]
+	 * @return {[type]}        [description]
+	 */
 	didi.loading = function(text, time, hideCB, showCB) {
 		_dialog = new dialog({
 			type: "loading",
@@ -377,6 +410,5 @@
 	};
 
 	window.didi.dialog = dialog; // 注册dialog到didi命名空间下
-
 
 })(window);
