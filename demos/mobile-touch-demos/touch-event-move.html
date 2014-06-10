@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>touch-move</title>
+</head>
+<body>
+<section>
+<input type="button" id="btn-move" value="STOP-TOUCH-MOVE" style="width: 200px; height: 90px;">
+</section>
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded",function(ev){
+    var abc = "abc", btnMove = document.getElementById('btn-move');
+
+    var didi = {
+        touch: function(ele, callback, bubble){
+            if(!bubble){
+                bubble = false;
+            }
+            if(ele && callback){
+                ele.addEventListener('touchstart',function(ev){
+                    ev.target.focus();
+                    ev.stopPropagation();
+                },bubble);
+
+                ele.addEventListener('touchend',function(ev){
+                    ev.target.blur();
+                    callback();
+                },bubble);
+
+                ele.addEventListener('touchmove',function(ev){
+                    ele.removeEventListener('touchend',callback, false);
+                },bubble);
+            }
+        }
+    };
+
+    /*
+    * touchstart事件
+    */
+    var callback = function(){
+        alert("ssdss");
+    };
+    didi.touch(btnMove, callback, false);
+
+    // btnMove.addEventListener("touchstart",function(ev){
+        //     alert(abc);
+    // },false);
+
+},false);
+</script>
+</body>
+</html>
