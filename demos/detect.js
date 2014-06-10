@@ -1,4 +1,10 @@
-(function(window) {
+/**
+ * window.requestAnimationFrame
+ * @param  {[type]} window    [description]
+ * @param  {[type]} undefined [description]
+ * @return {[type]}           [description]
+ */
+(function(window, undefined) {
 	if (!window.requestAnimationFrame) {
 		window.requestAnimationFrame = (window.webkitRequestAnimationFrame ||
 			window.mozRequestAnimationFrame ||

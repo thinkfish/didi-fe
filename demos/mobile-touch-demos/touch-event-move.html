@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 <title>touch-move</title>
 </head>
 <body>
@@ -23,13 +24,14 @@ document.addEventListener("DOMContentLoaded",function(ev){
                     ev.stopPropagation();
                 },bubble);
 
-                ele.addEventListener('touchend',function(ev){
+                var cb = function(ev){
                     ev.target.blur();
-                    callback();
-                },bubble);
+                    callback(ev);
+                };
+                ele.addEventListener('touchend', cb ,bubble);
 
                 ele.addEventListener('touchmove',function(ev){
-                    ele.removeEventListener('touchend',callback, false);
+                    ele.removeEventListener('touchend',cb, false);
                 },bubble);
             }
         }
