@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded",function(ev){
                         alert("moved");
                     }else{
                         callback(ev);
+                        delete ev.target.moved;
                     }
                 };
                 ele.addEventListener('touchend', cb ,bubble);
