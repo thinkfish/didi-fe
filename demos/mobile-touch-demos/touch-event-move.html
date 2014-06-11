@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded",function(ev){
                     ev.target.blur();
                     // console.log(ev.target.getAttribute("start"));
                     if(ev.target.getAttribute("moved") == "true"){
-                        delete ev.target.moved;
+                        ev.target.setAttribute("moved","false");
                         alert("moved");
                     }else{
                         callback(ev);
