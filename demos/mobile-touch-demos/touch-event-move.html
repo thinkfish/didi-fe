@@ -29,10 +29,10 @@ document.addEventListener("DOMContentLoaded",function(ev){
                     ev.target.blur();
                     // console.log(ev.target.getAttribute("start"));
                     if(ev.target.getAttribute("moved") == "true"){
+                        delete ev.target.moved;
                         alert("moved");
                     }else{
                         callback(ev);
-                        delete ev.target.moved;
                     }
                 };
                 ele.addEventListener('touchend', cb ,bubble);
