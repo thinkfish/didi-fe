@@ -21,17 +21,24 @@ document.addEventListener("DOMContentLoaded",function(ev){
             if(ele && callback){
                 ele.addEventListener('touchstart',function(ev){
                     ev.target.focus();
+                    // ev.target.setAttribute('start',true);
                     ev.stopPropagation();
                 },bubble);
 
                 var cb = function(ev){
                     ev.target.blur();
-                    callback(ev);
+                    // console.log(ev.target.getAttribute("start"));
+                    if(ev.target.getAttribute("moved") == "true"){
+                        alert("moved");
+                    }else{
+                        callback(ev);
+                    }
                 };
                 ele.addEventListener('touchend', cb ,bubble);
 
                 ele.addEventListener('touchmove',function(ev){
-                    ele.removeEventListener('touchend',cb, false);
+                    ev.target.setAttribute("moved",true);
+                    // ele.removeEventListener('touchend',cb, false);
                 },bubble);
             }
         }
@@ -40,10 +47,9 @@ document.addEventListener("DOMContentLoaded",function(ev){
     /*
     * touchstart事件
     */
-    var callback = function(){
+    didi.touch(btnMove, function(){
         alert("ssdss");
-    };
-    didi.touch(btnMove, callback, false);
+    }, false);
 
     // btnMove.addEventListener("touchstart",function(ev){
         //     alert(abc);
