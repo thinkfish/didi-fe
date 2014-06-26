@@ -98,6 +98,10 @@
 8. curl ifconfig.me
 9. ps -ef |grep packagename
 10. kill pid
+11. grep的详细使用
+
+	
+	
 
 ###三、git -- Linux & mac
 

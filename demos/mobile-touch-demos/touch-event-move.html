@@ -21,26 +21,21 @@ document.addEventListener("DOMContentLoaded",function(ev){
             if(ele && callback){
                 ele.addEventListener('touchstart',function(ev){
                     ev.target.focus();
-                    // ev.target.setAttribute('start',true);
-                    ev.stopPropagation();
+                    ev.stopPropagation(); //阻止冒泡
                 },bubble);
-
-                var cb = function(ev){
-                    ev.target.blur();
-                    // console.log(ev.target.getAttribute("start"));
-                    if(ev.target.getAttribute("moved") == "true"){
-                        ev.target.setAttribute("moved","false");
-                        alert("moved");
-                    }else{
-                        callback(ev);
-                    }
-                };
-                ele.addEventListener('touchend', cb ,bubble);
 
                 ele.addEventListener('touchmove',function(ev){
-                    ev.target.setAttribute("moved",true);
-                    // ele.removeEventListener('touchend',cb, false);
+                    ev.target.setAttribute("moved","true");
                 },bubble);
+
+                ele.addEventListener('touchend', function(ev){
+                    ev.target.blur();
+                    if(ev.target.getAttribute("moved") !== "true"){
+                        callback(ev);
+                    }else{
+                        ev.target.setAttribute("moved","false");
+                    }
+                } ,bubble);
             }
         }
     };
@@ -48,9 +43,17 @@ document.addEventListener("DOMContentLoaded",function(ev){
     /*
     * touchstart事件
     */
-    didi.touch(btnMove, function(){
-        alert("ssdss");
-    }, false);
+    // didi.touch(btnMove, function(ev){
+    //     console.log(ev.target);
+    //     console.log("ssdss");
+    // }, false);
+
+    btnMove.addEventListener('click',function(){
+        alert("1");
+    });
+    btnMove.addEventListener('click',function(){
+        alert("12");
+    });
 
     // btnMove.addEventListener("touchstart",function(ev){
         //     alert(abc);

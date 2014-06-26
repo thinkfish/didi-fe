@@ -24,11 +24,14 @@
 3. input event continue ajax -- *knowledge*
 4. frontend technology standard -- *knowledge*
 5. frontend technology system -- *knowledge*
+6. grunt
 
 ###MA
 ---
 
 1. H5定位和首页加价的改版成html结构的 -- *project*2. 自己做的项目中的限制输入金额和控制ajax上传 -- *project*3. ajax原理 -- *knowledge*4. 我自己的动画库的分享 -- *knowledge*
+5. bootstrap
+6. 动画
 
 ###XING
 ---

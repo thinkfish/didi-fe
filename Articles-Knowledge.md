@@ -21,3 +21,11 @@
 12. [html5的meta详解](http://www.w3cfuns.com/thread-5595925-1-1.html)
 13. [浏览器渲染优化](https://github.com/puterjam/speed_render)
 14. [H5 Webworker](http://www.cnblogs.com/wishyouhappy/p/3766225.html)
+15. [Webapp应用开发总结](http://my.oschina.net/maomi/blog/183790#OSC_h2_1)
+16. [入门级webapp](http://www.duo66.com/post-5595.html)
+17. [Retina屏幕和普通屏幕之间的像素](http://www.zhangxinxu.com/wordpress/2012/10/new-pad-retina-devicepixelratio-css-page/)--css像素点和Bitmap像素点，Retina中1个像素占4个普通bitmap像素点
+18. [webkit webapp开发要点总结](http://www.w3cfuns.com/thread-1965-1-1.html)
+19. [javascript通源策略](https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy)
+20. [Webapp开发那些事儿](http://udc.weibo.com/2013/04/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E9%82%A3%E4%BA%9B%E4%BA%8B/)
+21. [Touch事件的处理](http://www.cnblogs.com/pifoo/archive/2011/05/23/webkit-touch-event-1.html)
+22. [Webapp开发总结](http://www.16code.com/webapp%E5%89%8D%E7%AB%AF%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7%E6%80%BB%E7%BB%93/)
