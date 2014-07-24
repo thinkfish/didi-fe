@@ -6,7 +6,7 @@
 ---
 
 1. [EMCA262-5-中文版](http://ecmascript.cn/)
-2. 单例模式 [cnblogs汤姆大叔](http://www.cnblogs.com/TomXu/archive/2012/02/20/2352817.html) [腾讯前端AlloyTeam](http://www.alloyteam.com/2012/10/common-javascript-design-patterns/)
+2. [cnblogs汤姆大叔](http://www.cnblogs.com/TomXu/archive/2012/02/20/2352817.html) [腾讯前端AlloyTeam](http://www.alloyteam.com/2012/10/common-javascript-design-patterns/) 单例模式
 3. [浏览器工作原理](http://ux.sohu.com/topics/50972d9ae7de3e752e0081ff)
 4. [手机端Data-Uri和css sprites哪个更快](http://ourjs.com/detail/5227e418583e06280300000a)
 4. [从font-face转向SVG的十大理由](http://ourjs.com/detail/532bdaea6922aa7e1d000002)
@@ -29,3 +29,4 @@
 20. [Webapp开发那些事儿](http://udc.weibo.com/2013/04/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E9%82%A3%E4%BA%9B%E4%BA%8B/)
 21. [Touch事件的处理](http://www.cnblogs.com/pifoo/archive/2011/05/23/webkit-touch-event-1.html)
 22. [Webapp开发总结](http://www.16code.com/webapp%E5%89%8D%E7%AB%AF%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7%E6%80%BB%E7%BB%93/)
+23. [Webapp字体单位](http://www.w3cplus.com/css3/define-font-size-with-css3-rem)
