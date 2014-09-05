@@ -72,7 +72,7 @@
         return result;
     };
     
-    /*一个更简单的方法*/
+    /*一个更简单的方法 author:songchao*/
     function getExtension(path){
         return path.split('.').pop();
     }
