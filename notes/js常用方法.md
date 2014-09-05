@@ -71,6 +71,11 @@
         //这句更容易理解是不是 后面的加号还可以改成*结果是一样的
         return result;
     };
+    
+    /*一个更简单的方法*/
+    function getExtension(path){
+        return path.split('.').pop();
+    }
 
 ##获取字符串的长度
     
