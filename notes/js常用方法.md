@@ -180,7 +180,7 @@
             var eles = node.getElementsByTagName("*");
             for (var i = 0, len = eles.length; i < len; i++) {
                 if (eles[i].getAttribute) {
-                    if (eles[i].getAttribute("className").indexOf(className) !== -1) {
+                    if (eles[i].getAttribute("class").indexOf(className) !== -1) {
                         res.push(eles[i]);
                     } else {}
                 } else {}
